@@ -17,6 +17,7 @@ mkdir -p ${ROOT}www/include
 mkdir -p ${ROOT}www/images
 mkdir -p ${ROOT}www/javascript
 
+cp -r ${ROOT}/ext/flamework/css ${ROOT}www/
 cp -r ${ROOT}/ext/flamework/templates ${ROOT}www/
 cp -r ${ROOT}/ext/flamework/templates_c ${ROOT}www/
 
@@ -44,9 +45,10 @@ cp ${ROOT}setup/.htaccess-deny ${ROOT}config/.htaccess
 cp ${ROOT}setup/.htaccess-deny ${ROOT}www/include/.htaccess
 cp ${ROOT}setup/.htaccess-deny ${ROOT}www/templates/.htaccess
 cp ${ROOT}setup/.htaccess-deny ${ROOT}www/templates_c/.htaccess
-cp ${ROOT}setup/.htaccess-deny ${ROOT}www/javascript/.htaccess
-cp ${ROOT}setup/.htaccess-deny ${ROOT}www/css/.htaccess
-cp ${ROOT}setup/.htaccess-deny ${ROOT}www/images/.htaccess
+
+cp ${ROOT}setup/.htaccess-noindexes ${ROOT}www/javascript/.htaccess
+cp ${ROOT}setup/.htaccess-noindexes ${ROOT}www/css/.htaccess
+cp ${ROOT}setup/.htaccess-noindexes ${ROOT}www/images/.htaccess
 
 # db schema(s)
 
