@@ -54,6 +54,8 @@
 	# App specific stuff
 	#
 
+	$GLOBALS['cfg']['abs_root_url'] = '';		# silence this so that it doesn't trip that code
+							# that tries to work out server names and directories
 	$GLOBALS['cfg']['auth_cookie_name'] = 'a';
 
 	$GLOBALS['cfg']['pagination_per_page'] = 25;
