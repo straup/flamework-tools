@@ -52,4 +52,5 @@ cp ${ROOT}setup/.htaccess-noindexes ${ROOT}www/images/.htaccess
 
 # db schema(s)
 
+cat ${ROOT}ext/flamework/schema/db_tickets.schema >> ${ROOT}schema/db_tickets.schema
 cat ${ROOT}ext/flamework/schema/db_main.schema >> ${ROOT}schema/db_main.schema
