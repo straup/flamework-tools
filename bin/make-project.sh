@@ -19,5 +19,7 @@ rm -rf ${PROJECT}/www/cron
 rm -rf ${PROJECT}/www/docs
 rm -rf ${PROJECT}/www/tests
 
+mv ${PROJECT}/www/schema ${PROJECT}/
+
 # sudo chown -R www-data ${PROJECT}/www/templates_c
 
