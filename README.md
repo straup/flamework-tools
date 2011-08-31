@@ -1,6 +1,8 @@
 flamework-tools
 --
 
-Tools for working with [Flamework](https://github.com/exflickr/flamework).
+These are just a variety of shell scripts and tools I've written for myself to
+automate the setting up of a flamework-derived project (using my own fork of the
+project).
 
-**THIS STUFF IS NOT READY FOR ACTUAL USE. SERIOUSLY. STOP NOW.**
+They will probably work for you but they've been written primarily for me.
