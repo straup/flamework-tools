@@ -11,6 +11,8 @@ mkdir -p ${PROJECT}/www
 
 git clone git://github.com/straup/flamework.git ${PROJECT}/www/
 
+echo "*~" > ${PROJECT}/.gitignore
+
 rm -rf ${PROJECT}/www/.git
 rm -f ${PROJECT}/www/.gitattributes
 rm -f ${PROJECT}/www/.gitmodules
