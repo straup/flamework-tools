@@ -26,15 +26,23 @@ cp ${PROJECT}/www/include/config.php.example ${PROJECT}/www/include/config.php
 
 mv ${PROJECT}/www/schema ${PROJECT}/
 
+# TODO: figure out if sudo is necessary
 # sudo chown -R www-data ${PROJECT}/www/templates_c
 
 cp -r ${TOOLS}/flamework-bin ${PROJECT}/bin
 
-# call setup-db.sh here or make that a discrete step?
-
-# generate a bunch of secrets
 # TODO: squirt these in to the config file automatically
 
-php -q ${PROJECT}/bin/generate_secret.php
-php -q ${PROJECT}/bin/generate_secret.php
-php -q ${PROJECT}/bin/generate_secret.php
+COOKIE_SECRET=`php -q ${PROJECT}/bin/generate_secret.php`
+CRUMB_SECRET=`php -q ${PROJECT}/bin/generate_secret.php`
+PASSWORD_SECRET=`php -q ${PROJECT}/bin/generate_secret.php`
+
+echo "";
+echo "\t------------------------------";
+
+echo "\t$GLOBALS['cfg']['crypto_cookie_secret'] = '${COOKIE_SECRET}';"
+echo "\t$GLOBALS['cfg']['crypto_crumb_secret'] = '${CRUMB_SECRET}';"
+echo "\t$GLOBALS['cfg']['crypto_password_secret'] = '${PASSWORD_SECRET}';"
+
+echo "\t------------------------------";
+echo "";
