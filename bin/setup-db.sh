@@ -1,18 +1,43 @@
 #!/bin/sh
 
-echo "this doesn't work yet"
-exit
+WHOAMI=`readlink -f $0`
+WHEREAMI=`dirname $WHOAMI`
+TOOLS=`dirname $WHEREAMI`
 
-DBNAME=$1
-USERNAME=$2
+PROJECT=$1
+DBNAME=$2
+USERNAME=$3
 
-# shell out to generate_secret.php ?
-PASSWORD='???'
+PASSWORD=`php -q ${PROJECT}/bin/generate_secret.php`
 
-CREATE DATABASE ${DNAME};
+echo "CREATE DATABASE ${DBNAME};" > /tmp/${DBNAME}.sql
+echo "CREATE user '${USERNAME}'@'localhost' IDENTIFIED BY '${PASSWORD}';" >> /tmp/${DBNAME}.sql
+echo "GRANT SELECT,UPDATE,DELETE,INSERT ON ${DBNAME}.* TO '${USERNAME}'@'localhost' IDENTIFIED BY '${PASSWORD}';" >> /tmp/${DBNAME}.sql
+echo "FLUSH PRIVILEGES;" >> /tmp/${DBNAME}.sql
 
-CREATE user '${USERNAME}'@'localhost' IDENTIFIED BY '${PASSWORD}';
+echo "USE ${DBNAME};" >> /tmp/${DBNAME}.sql;
 
-GRANT SELECT,UPDATE,DELETE, INSERT ON ${DBNAME}.* TO '${USERNAME}'@'localhost' IDENTIFIED BY '${PASSWORD}';
+for f in `ls -a ${PROJECT}/schema/*.schema`
+do
+	echo "" >> /tmp/${DBNAME}.sql
+	cat $f >> /tmp/${DBNAME}.sql
+done
 
-FLUSH PRIVILEGES;
+mysql -u root -p < /tmp/${DBNAME}.sql
+unlink /tmp/${DBNAME}.sql
+
+# write to disk?
+
+echo ""
+echo "\t------------------------------";
+
+echo "\t\$GLOBALS['cfg']['db_main'] = array(";
+echo "\t\t'host' => 'localhost',";
+echo "\t\t'user' => '${USERNAME}',";
+echo "\t\t'pass' => '${PASSWORD}',";
+echo "\t\t'name' => '${DBNAME}',";
+echo "\t\t'auto_connect' => 0,";
+echo "\t);";
+
+echo "\t------------------------------";
+echo "";

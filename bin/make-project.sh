@@ -30,6 +30,8 @@ mv ${PROJECT}/www/schema ${PROJECT}/
 
 cp -r ${TOOLS}/flamework-bin ${PROJECT}/bin
 
+# call setup-db.sh here or make that a discrete step?
+
 # generate a bunch of secrets
 # TODO: squirt these in to the config file automatically
 
