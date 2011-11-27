@@ -33,6 +33,8 @@ sudo chown -R www-data ${PROJECT}/www/templates_c
 
 cp -r ${TOOLS}/flamework-bin ${PROJECT}/bin
 
+# TODO: squirt in project name/path here
+
 cp ${TOOLS}/apache/example.conf ${PROJECT}/apache/{$PROJECT}.conf.example
 
 # TODO: squirt these in to the config file automatically
