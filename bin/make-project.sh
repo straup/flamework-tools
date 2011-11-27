@@ -8,10 +8,12 @@ PROJECT=$1
 
 mkdir -p ${PROJECT}
 mkdir -p ${PROJECT}/www
+mkdir -p ${PROJECT}/apache
 
 git clone git://github.com/straup/flamework.git ${PROJECT}/www/
 
 echo "*~" > ${PROJECT}/.gitignore
+echo "*.conf" > ${PROJECT}/apache/.gitignore
 
 rm -rf ${PROJECT}/www/.git
 rm -f ${PROJECT}/www/.gitattributes
@@ -27,9 +29,11 @@ cp ${PROJECT}/www/include/config.php.example ${PROJECT}/www/include/config.php
 mv ${PROJECT}/www/schema ${PROJECT}/
 
 # TODO: figure out if sudo is necessary
-# sudo chown -R www-data ${PROJECT}/www/templates_c
+sudo chown -R www-data ${PROJECT}/www/templates_c
 
 cp -r ${TOOLS}/flamework-bin ${PROJECT}/bin
+
+cp ${TOOLS}/apache/example.conf ${PROJECT}/apache/{$PROJECT}.conf.example
 
 # TODO: squirt these in to the config file automatically
 
