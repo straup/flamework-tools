@@ -46,9 +46,9 @@ PASSWORD_SECRET=`php -q ${PROJECT}/bin/generate_secret.php`
 echo "";
 echo "\t------------------------------";
 
-echo "\t$GLOBALS['cfg']['crypto_cookie_secret'] = '${COOKIE_SECRET}';"
-echo "\t$GLOBALS['cfg']['crypto_crumb_secret'] = '${CRUMB_SECRET}';"
-echo "\t$GLOBALS['cfg']['crypto_password_secret'] = '${PASSWORD_SECRET}';"
+echo "\t\$GLOBALS['cfg']['crypto_cookie_secret'] = '${COOKIE_SECRET}';"
+echo "\t\$GLOBALS['cfg']['crypto_crumb_secret'] = '${CRUMB_SECRET}';"
+echo "\t\$GLOBALS['cfg']['crypto_password_secret'] = '${PASSWORD_SECRET}';"
 
 echo "\t------------------------------";
 echo "";
