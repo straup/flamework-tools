@@ -5,37 +5,31 @@ WHEREAMI=`dirname $WHOAMI`
 TOOLS=`dirname $WHEREAMI`
 
 PROJECT=$1
+PROJET_NAME=`basename ${PROJECT}`
 
-mkdir -p ${PROJECT}
-mkdir -p ${PROJECT}/www
+git clone git://github.com/straup/flamework.git ${PROJECT}/
+
 mkdir -p ${PROJECT}/apache
 
-git clone git://github.com/straup/flamework.git ${PROJECT}/www/
+echo "*~" >> ${PROJECT}/.gitignore
+echo "*.conf" >> ${PROJECT}/apache/.gitignore
 
-echo "*~" > ${PROJECT}/.gitignore
-echo "*.conf" > ${PROJECT}/apache/.gitignore
+rm -rf ${PROJECT}/.git
+rm -f ${PROJECT}/.gitattributes
+rm -f ${PROJECT}/README.markdown
 
-rm -rf ${PROJECT}/www/.git
-rm -f ${PROJECT}/www/.gitattributes
-rm -f ${PROJECT}/www/.gitmodules
-rm -f ${PROJECT}/www/README.markdown
-
-rm -rf ${PROJECT}/www/cron
-rm -rf ${PROJECT}/www/docs
-rm -rf ${PROJECT}/www/tests
+rm -rf ${PROJECT}/cron
+rm -rf ${PROJECT}/docs
+rm -rf ${PROJECT}/tests
 
 cp ${PROJECT}/www/include/config.php.example ${PROJECT}/www/include/config.php
 
-mv ${PROJECT}/www/schema ${PROJECT}/
-
 # TODO: figure out if sudo is necessary
-sudo chown -R www-data ${PROJECT}/www/templates_c
+# sudo chown -R www-data ${PROJECT}/www/templates_c
 
 cp -r ${TOOLS}/flamework-bin ${PROJECT}/bin
 
-# TODO: squirt in project name/path here
-
-cp ${TOOLS}/apache/example.conf ${PROJECT}/apache/{$PROJECT}.conf.example
+cp ${TOOLS}/apache/example.conf ${PROJECT}/apache/{$PROJECT_NAME}.conf.example
 
 # TODO: squirt these in to the config file automatically
 
