@@ -31,6 +31,13 @@ cp -r ${TOOLS}/flamework-bin ${PROJECT}/bin
 
 cp ${TOOLS}/apache/example.conf ${PROJECT}/apache/{$PROJECT_NAME}.conf.example
 
+# in case the user is running out of a sub-directory
+
+cp ${TOOLS}/apache/.htaccess-deny ${PROJECT}/apache/.htaccess
+cp ${TOOLS}/apache/.htaccess-deny ${PROJECT}/schema/.htaccess
+cp ${TOOLS}/apache/.htaccess-deny ${PROJECT}/bin/.htaccess
+cp ${TOOLS}/apache/.htaccess-noindexes ${PROJECT}/.htaccess
+
 # TODO: squirt these in to the config file automatically
 
 COOKIE_SECRET=`php -q ${PROJECT}/bin/generate_secret.php`
