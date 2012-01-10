@@ -27,7 +27,8 @@ cp ${PROJECT}/www/include/config.php.example ${PROJECT}/www/include/config.php
 # TODO: figure out if sudo is necessary
 # sudo chown -R www-data ${PROJECT}/www/templates_c
 
-cp -r ${TOOLS}/flamework-bin ${PROJECT}/bin
+# deprecated (probably)
+# cp -r ${TOOLS}/flamework-bin ${PROJECT}/bin
 
 cp ${TOOLS}/apache/example.conf ${PROJECT}/apache/{$PROJECT_NAME}.conf.example
 
