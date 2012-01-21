@@ -30,7 +30,7 @@ cp ${PROJECT}/www/include/config.php.example ${PROJECT}/www/include/config.php
 # deprecated (probably)
 # cp -r ${TOOLS}/flamework-bin ${PROJECT}/bin
 
-cp ${TOOLS}/apache/example.conf ${PROJECT}/apache/{$PROJECT_NAME}.conf.example
+cp ${TOOLS}/apache/example.conf ${PROJECT}/apache/${PROJECT_NAME}.conf.example
 
 # in case the user is running out of a sub-directory
 
