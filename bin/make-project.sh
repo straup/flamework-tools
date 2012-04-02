@@ -18,7 +18,7 @@ rm -rf ${PROJECT}/.git
 rm -f ${PROJECT}/.gitattributes
 rm -f ${PROJECT}/README.markdown
 
-rm -rf ${PROJECT}/cron
+rm -rf ${PROJECT}/www/cron
 rm -rf ${PROJECT}/docs
 rm -rf ${PROJECT}/tests
 
