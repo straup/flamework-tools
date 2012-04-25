@@ -13,10 +13,13 @@ mkdir -p ${PROJECT}/apache
 
 echo "*~" >> ${PROJECT}/.gitignore
 echo "*.conf" >> ${PROJECT}/apache/.gitignore
-
 rm -rf ${PROJECT}/.git
 rm -f ${PROJECT}/.gitattributes
-rm -f ${PROJECT}/README.markdown
+
+mv ${PROJECT}/README.md	${PROJECT}/README.FLAMEWORK.md
+
+echo ${PROJECT_NAME} > ${PROJECT}/README.md
+echo "--" >> ${PROJECT}/README.md
 
 rm -rf ${PROJECT}/www/cron
 rm -rf ${PROJECT}/docs
