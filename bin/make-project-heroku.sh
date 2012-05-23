@@ -50,7 +50,8 @@ mkdir ${PROJECT}/www/heroku/
 cp ${PROJECT}/phpinfo-heroku/mbstring.so ${PROJECT}/www/heroku/
 cp ${TOOLS}/apache/.htaccess-deny ${PROJECT}/www/heroku/.htaccess
 
-cp ${PROJECT}/phpinfo-heroku/php.ini ${PROJECT}/www/
+echo "extension=/app/www/heroku/mbstring.so" > ${PROJECT}/www/php.ini
+
 echo "" >> ${PROJECT}/www/.htaccess
 echo "# Heroku stuff" >> ${PROJECT}/www/.htaccess
 echo "RewriteRule  ^php.ini	- [R=404,L]" >> ${PROJECT}/www/.htaccess
@@ -67,8 +68,16 @@ echo "all done";
 echo "------------------------------";
 echo "your flamework project is ready to be uploaded to Heroku in:"
 echo "\t${PROJECT}/www/";
+echo ""
 
-echo "that's work you'll need to do yourself; this is a good reference:"
-echo "http://www.gravitywell.co.uk/blog/post/deploying-php-apps-to-heroku";
+# http://www.gravitywell.co.uk/blog/post/deploying-php-apps-to-heroku
 
+echo "that's work you'll need to do yourself, for example:";
+echo "------------------------------";
+echo "$> cd ${PROJECT}/www"
+echo "$> git init";
+echo "$> git add .";
+echo "$> git commit -m 'initial commit'";
+echo "$> heroku create --stack cedar";
+echo "$> git push heroku master"
 echo "";

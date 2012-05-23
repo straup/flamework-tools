@@ -1,7 +1,7 @@
 #!/bin/sh
 
 PROJECT=$1
-CONFIG=${PROJECT}www/include/config.php
+CONFIG=${PROJECT}/www/include/config.php
 
 # We probably don't care about any errors...
 PHP='php -d display_errors=off -q'
