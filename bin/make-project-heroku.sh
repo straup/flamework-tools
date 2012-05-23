@@ -16,7 +16,8 @@ TOOLS=`dirname $WHEREAMI`
 PROJECT=$1
 PROJET_NAME=`basename ${PROJECT}`
 
-echo "# cloning dependencies"
+echo "cloning dependencies"
+echo "------------------------------";
 
 git clone git://github.com/straup/flamework.git ${PROJECT}/
 git clone git://github.com/yandod/phpinfo-heroku ${PROJECT}/phpinfo-heroku/
@@ -27,20 +28,23 @@ rm -f ${PROJECT}/.gitattributes
 rm -rf ${PROJECT}/phpinfo-heroku/.git
 rm -f ${PROJECT}/phpinfo-heroku/.gitattributes
 
-echo "# setting up README files"
+echo "setting up README files"
+echo "------------------------------";
 
 mv ${PROJECT}/README.md	${PROJECT}/README.FLAMEWORK.md
 
 echo ${HEROKU_NAME} > ${PROJECT}/README.md
 echo "--" >> ${PROJECT}/README.md
 
-echo "# removing unnecessary files"
+echo "removing unnecessary files"
+echo "------------------------------";
 
 rm -rf ${PROJECT}/www/cron
 rm -rf ${PROJECT}/docs
 rm -rf ${PROJECT}/tests
 
-echo "# doing the mbstring dance"
+echo "doing the mbstring dance"
+echo "------------------------------";
 
 mkdir ${PROJECT}/www/heroku/
 cp ${PROJECT}/phpinfo-heroku/mbstring.so ${PROJECT}/www/heroku/
@@ -51,23 +55,20 @@ echo "" >> ${PROJECT}/www/.htaccess
 echo "# Heroku stuff" >> ${PROJECT}/www/.htaccess
 echo "RewriteRule  ^php.ini	- [R=404,L]" >> ${PROJECT}/www/.htaccess
 
-echo "# setting up config files"
+echo "setting up config files"
+echo "------------------------------";
 
 cp ${PROJECT}/www/include/config.php.example ${PROJECT}/www/include/config.php
 echo "*~" >> ${PROJECT}/www/.gitignore
 
-# TODO: squirt these in to the config file automatically
+${TOOLS}/bin/configure-secrets.sh ${PROJECT}
 
-COOKIE_SECRET=`php -q ${PROJECT}/bin/generate_secret.php`
-CRUMB_SECRET=`php -q ${PROJECT}/bin/generate_secret.php`
-PASSWORD_SECRET=`php -q ${PROJECT}/bin/generate_secret.php`
+echo "all done";
+echo "------------------------------";
+echo "your flamework project is ready to be uploaded to Heroku in:"
+eecho "\t${PROJECT}/www/";
 
-echo "";
-echo "\t------------------------------";
+echo "that's work you'll need to do yourself; this is a good reference:"
+echo "http://www.gravitywell.co.uk/blog/post/deploying-php-apps-to-heroku";
 
-echo "\t\$GLOBALS['cfg']['crypto_cookie_secret'] = '${COOKIE_SECRET}';"
-echo "\t\$GLOBALS['cfg']['crypto_crumb_secret'] = '${CRUMB_SECRET}';"
-echo "\t\$GLOBALS['cfg']['crypto_password_secret'] = '${PASSWORD_SECRET}';"
-
-echo "\t------------------------------";
 echo "";
