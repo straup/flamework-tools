@@ -79,5 +79,10 @@ echo "$> git init";
 echo "$> git add .";
 echo "$> git commit -m 'initial commit'";
 echo "$> heroku create --stack cedar";
-echo "$> git push heroku master"
+echo "$> git push heroku master";
+
+echo "IMPORTANT"
+echo "------------------------------";
+echo "out of necessity your config is checked in to source control (git)";
+echo "that's not awesome but there you go, plan accordingly";
 echo "";
