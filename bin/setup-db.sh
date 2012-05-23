@@ -17,7 +17,10 @@ PROJECT=$1
 DBNAME=$2
 USERNAME=$3
 
-PASSWORD=`php -q ${PROJECT}/bin/generate_secret.php`
+# We probably don't care about any errors...
+PHP='php -d display_errors=off -q'
+
+PASSWORD=`${PHP} ${PROJECT}/bin/generate_secret.php`
 
 echo "CREATE DATABASE ${DBNAME};" > /tmp/${DBNAME}.sql
 echo "CREATE user '${USERNAME}'@'localhost' IDENTIFIED BY '${PASSWORD}';" >> /tmp/${DBNAME}.sql

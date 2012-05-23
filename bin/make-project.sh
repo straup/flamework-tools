@@ -16,6 +16,9 @@ TOOLS=`dirname $WHEREAMI`
 PROJECT=$1
 PROJET_NAME=`basename ${PROJECT}`
 
+echo "cloning dependencies"
+echo "------------------------------";
+
 git clone git://github.com/straup/flamework.git ${PROJECT}/
 
 mkdir -p ${PROJECT}/apache
@@ -25,45 +28,46 @@ echo "*.conf" >> ${PROJECT}/apache/.gitignore
 rm -rf ${PROJECT}/.git
 rm -f ${PROJECT}/.gitattributes
 
+echo "setting up README files"
+echo "------------------------------";
+
 mv ${PROJECT}/README.md	${PROJECT}/README.FLAMEWORK.md
 
 echo ${PROJECT_NAME} > ${PROJECT}/README.md
 echo "--" >> ${PROJECT}/README.md
 
+echo "removing unnecessary files"
+echo "------------------------------";
+
 rm -rf ${PROJECT}/www/cron
 rm -rf ${PROJECT}/docs
 rm -rf ${PROJECT}/tests
 
-cp ${PROJECT}/www/include/config.php.example ${PROJECT}/www/include/config.php
-
 # TODO: figure out if sudo is necessary
 # sudo chown -R www-data ${PROJECT}/www/templates_c
 
-# deprecated (probably)
-# cp -r ${TOOLS}/flamework-bin ${PROJECT}/bin
+echo "setting up apache files"
+echo "------------------------------";
 
 cp ${TOOLS}/apache/example.conf ${PROJECT}/apache/${PROJECT_NAME}.conf.example
 cp ${TOOLS}/apache/example.conf ${PROJECT}/apache/README.md
 
-# in case the user is running out of a sub-directory
+echo "setting up .htaccess files"
+echo "------------------------------";
 
 cp ${TOOLS}/apache/.htaccess-deny ${PROJECT}/apache/.htaccess
 cp ${TOOLS}/apache/.htaccess-deny ${PROJECT}/schema/.htaccess
 cp ${TOOLS}/apache/.htaccess-deny ${PROJECT}/bin/.htaccess
 cp ${TOOLS}/apache/.htaccess-noindexes ${PROJECT}/.htaccess
 
-# TODO: squirt these in to the config file automatically
+echo "setting up (application) config files"
+echo "------------------------------";
 
-COOKIE_SECRET=`php -q ${PROJECT}/bin/generate_secret.php`
-CRUMB_SECRET=`php -q ${PROJECT}/bin/generate_secret.php`
-PASSWORD_SECRET=`php -q ${PROJECT}/bin/generate_secret.php`
+cp ${PROJECT}/www/include/config.php.example ${PROJECT}/www/include/config.php
+echo "*~" >> ${PROJECT}/www/.gitignore
 
-echo "";
-echo "\t------------------------------";
+${TOOLS}/bin/configure-secrets.sh ${PROJECT}
 
-echo "\t\$GLOBALS['cfg']['crypto_cookie_secret'] = '${COOKIE_SECRET}';"
-echo "\t\$GLOBALS['cfg']['crypto_crumb_secret'] = '${CRUMB_SECRET}';"
-echo "\t\$GLOBALS['cfg']['crypto_password_secret'] = '${PASSWORD_SECRET}';"
-
-echo "\t------------------------------";
-echo "";
+echo "all done";
+echo "------------------------------";
+echo ""
