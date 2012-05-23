@@ -66,7 +66,7 @@ ${TOOLS}/bin/configure-secrets.sh ${PROJECT}
 echo "all done";
 echo "------------------------------";
 echo "your flamework project is ready to be uploaded to Heroku in:"
-eecho "\t${PROJECT}/www/";
+echo "\t${PROJECT}/www/";
 
 echo "that's work you'll need to do yourself; this is a good reference:"
 echo "http://www.gravitywell.co.uk/blog/post/deploying-php-apps-to-heroku";
