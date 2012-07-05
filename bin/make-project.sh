@@ -19,7 +19,8 @@ PROJET_NAME=`basename ${PROJECT}`
 echo "cloning dependencies"
 echo "------------------------------";
 
-git clone git://github.com/straup/flamework.git ${PROJECT}/
+git clone https://github.com/straup/flamework.git ${PROJECT}/
+# git clone git://github.com/straup/flamework.git ${PROJECT}/
 
 mkdir -p ${PROJECT}/apache
 
