@@ -16,6 +16,7 @@ TOOLS=`dirname $WHEREAMI`
 PROJECT=$1
 DBNAME=$2
 USERNAME=$3
+DIST=$4
 
 # We probably don't care about any errors...
 PHP='php -d display_errors=off -q'
@@ -35,7 +36,13 @@ do
 	cat $f >> /tmp/${DBNAME}.sql
 done
 
-mysql -u root -p < /tmp/${DBNAME}.sql
+if [ $DIST == 'MAMP' ]
+then
+    /Applications/MAMP/Library/bin/mysql --host=localhost -uroot -p < /tmp/${DBNAME}.sql
+else
+    mysql -u root -p < /tmp/${DBNAME}.sql
+fi
+
 unlink /tmp/${DBNAME}.sql
 
 # write to disk?
