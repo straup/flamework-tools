@@ -1,14 +1,6 @@
 #!/bin/sh
 
-if test $OSTYPE = "FreeBSD"
-then
-    WHOAMI=`realpath $0`
-elif [[ $OSTYPE == darwin* ]]
-then
-    WHOAMI=`python -c 'import os, sys; print os.path.realpath(sys.argv[1])' $0`
-else
-    WHOAMI=`readlink -f $0`    
-fi
+WHOAMI=`python -c 'import os, sys; print os.path.realpath(sys.argv[1])' $0`
 
 WHEREAMI=`dirname $WHOAMI`
 TOOLS=`dirname $WHEREAMI`
@@ -20,7 +12,6 @@ echo "cloning dependencies"
 echo "------------------------------";
 
 git clone https://github.com/straup/flamework.git ${PROJECT}/
-# git clone git://github.com/straup/flamework.git ${PROJECT}/
 
 mkdir -p ${PROJECT}/apache
 
