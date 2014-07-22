@@ -7,6 +7,8 @@ project).
 
 They will probably work for you but they've been written primarily for me.
 
+They are specific to [my branch](https://github.com/straup/flamework) of Flamework, which doesn't always track 1:1 with the [exflickr](https://github.com/exflickr/flamework) branch.
+ 
 make-project.sh
 --
 

@@ -55,7 +55,7 @@ cp ${TOOLS}/apache/.htaccess-noindexes ${PROJECT}/.htaccess
 echo "setting up (application) config files"
 echo "------------------------------";
 
-cp ${PROJECT}/www/include/config.php.example ${PROJECT}/www/include/config.php
+cp ${PROJECT}/www/include/secrets.php.example ${PROJECT}/www/include/secrets.php
 echo "*~" >> ${PROJECT}/www/.gitignore
 
 ${TOOLS}/bin/configure-secrets.sh ${PROJECT}
