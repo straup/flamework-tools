@@ -6,7 +6,7 @@ WHEREAMI=`dirname $WHOAMI`
 TOOLS=`dirname $WHEREAMI`
 
 PROJECT=$1
-PROJET_NAME=`basename ${PROJECT}`
+PROJECT_NAME=`basename ${PROJECT}`
 
 echo "cloning dependencies"
 echo "------------------------------";
@@ -34,6 +34,8 @@ echo "------------------------------";
 rm -rf ${PROJECT}/www/cron
 rm -rf ${PROJECT}/docs
 rm -rf ${PROJECT}/tests
+rm -f ${PROJECT}/.travis.yml
+rm -f ${PROJECT}/Vagrantfile
 
 # TODO: figure out if sudo is necessary
 # sudo chown -R www-data ${PROJECT}/www/templates_c
