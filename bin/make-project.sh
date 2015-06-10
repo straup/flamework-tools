@@ -58,6 +58,8 @@ echo "setting up (application) config files"
 echo "------------------------------";
 
 cp ${PROJECT}/www/include/secrets.php.example ${PROJECT}/www/include/secrets.php
+rm ${PROJECT}/www/include/secrets.php.example
+
 echo "*~" >> ${PROJECT}/www/.gitignore
 
 ${TOOLS}/bin/configure-secrets.sh ${PROJECT}
