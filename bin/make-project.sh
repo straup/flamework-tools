@@ -36,6 +36,7 @@ rm -rf ${PROJECT}/docs
 rm -rf ${PROJECT}/tests
 rm -f ${PROJECT}/.travis.yml
 rm -f ${PROJECT}/Vagrantfile
+rm -f ${PROJECT}/LICENSE
 
 # TODO: figure out if sudo is necessary
 # sudo chown -R www-data ${PROJECT}/www/templates_c
