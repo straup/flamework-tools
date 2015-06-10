@@ -23,8 +23,6 @@ rm -f ${PROJECT}/.gitattributes
 echo "setting up README files"
 echo "------------------------------";
 
-mv ${PROJECT}/README.md	${PROJECT}/README.FLAMEWORK.md
-
 echo ${PROJECT_NAME} > ${PROJECT}/README.md
 echo "--" >> ${PROJECT}/README.md
 
