@@ -5,8 +5,19 @@ SECRETS=${PROJECT}/www/include/secrets.php
 
 if [ ! -f ${SECRETS} ]
 then
-    echo "Can't find ${SECRETS}, exiting"
-    exit
+
+    touch ${SECRETS}
+    echo "<?php" >> ${SECRETS}
+    echo ""
+    
+    echo "	$GLOBALS['cfg']['crypto_cookie_secret'] = '';" >> ${SECRETS}
+    echo "	$GLOBALS['cfg']['crypto_password_secret'] = '';" >> ${SECRETS}
+    echo "	$GLOBALS['cfg']['crypto_crumb_secret'] = '';" >> ${SECRETS}
+    echo "	$GLOBALS['cfg']['db_main']['pass'] = '';" >> ${SECRETS}
+    echo "	$GLOBALS['cfg']['db_users']['pass'] = '';" >> ${SECRETS}
+    echo "	$GLOBALS['cfg']['db_poormans_slaves']['pass'] = '';" >> ${SECRETS}
+
+    echo "" >> ${SECRETS}
 fi
 
 # We probably don't care about any errors...
