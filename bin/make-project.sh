@@ -11,7 +11,7 @@ PROJECT_NAME=`basename ${PROJECT}`
 echo "cloning dependencies"
 echo "------------------------------";
 
-git clone https://github.com/straup/flamework.git ${PROJECT}/
+git clone https://github.com/whosonfirst/flamework.git ${PROJECT}/
 
 mkdir -p ${PROJECT}/apache
 
@@ -35,6 +35,8 @@ rm -rf ${PROJECT}/tests
 rm -f ${PROJECT}/.travis.yml
 rm -f ${PROJECT}/Vagrantfile
 rm -f ${PROJECT}/LICENSE
+rm -f ${PROJECT}/www/paging.php
+rm -f ${PROJECT}/www/templates/page_paging.txt
 
 # TODO: figure out if sudo is necessary
 # sudo chown -R www-data ${PROJECT}/www/templates_c
