@@ -48,9 +48,10 @@ mkdir -p ${PROJECT}/apache
 echo "*.conf" >> ${PROJECT}/apache/.gitignore
 
 cp ${TOOLS}/apache/example.conf ${PROJECT}/apache/${PROJECT_NAME}.conf.example
+cp ${TOOLS}/apache/example.conf ${PROJECT}/apache/${PROJECT_NAME}.conf
 
-perl -p -i -e "s/__PROJECT_ROOT__/${PROJECT}/" ${PROJECT}/apache/${PROJECT_NAME}.conf.example
-perl -p -i -e "s/__PROJECT_NAME__/${PROJECT_NAME}/" ${PROJECT}/apache/${PROJECT_NAME}.conf.example
+perl -p -i -e "s/__PROJECT_ROOT__/${PROJECT}/" ${PROJECT}/apache/${PROJECT_NAME}.conf
+perl -p -i -e "s/__PROJECT_NAME__/${PROJECT_NAME}/" ${PROJECT}/apache/${PROJECT_NAME}.conf
 
 echo "cloning ubuntu utilities"
 echo "------------------------------";
