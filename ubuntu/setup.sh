@@ -11,7 +11,7 @@ sudo apt-get -y upgrade
 apt-get -y install apache2 mysql-server memcache
 apt-get -y install php5 php5-cli php5-curl php5-mcrypt php5-memcache php5-mysql
 
-for mod in rewrite.load proxy.load proxy.conf proxy_http.load
+for mod in rewrite.load proxy.load proxy.conf proxy_http.load ssl.conf ssl.load socache_shmcb.load
 do
     
     if [ -L /etc/apache2/mods-enabled/${mod} ]
@@ -30,7 +30,7 @@ done
 for ctx in apache2 cli
 do
 
-    for mod in curl.ini json.ini mcrypt.ini mysql.ini
+    for mod in mcrypt.ini
     do
 
 	if [ -L /etc/php5/${ctx}/conf.d/${mod} ]
@@ -45,7 +45,10 @@ do
 
 	sudo ln -s /etc/php5/mods-available/${mod} /etc/php5/${ctx}/conf.d/${mod}
     done
+
+    sudo perl -p -i -e "s/short_open_tag = Off/short_open_tag = On/" /etc/php5/${ctx}/php.ini;
 done
+
 
 chgrp -R www-data ${ROOT}/www/templates_c
 chmod -R g+ws ${ROOT}/www/templates_c

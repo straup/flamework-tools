@@ -1,14 +1,12 @@
 #!/bin/sh
 
 WHOAMI=`python -c 'import os, sys; print os.path.realpath(sys.argv[1])' $0`
+UBUNTU=`dirname $WHOAMI`
 
-WHEREAMI=`dirname $WHOAMI`
-TOOLS=`dirname $WHEREAMI`
+PROJECT=`dirname $UBUNTU`
 
-PROJECT=$1
 DBNAME=$2
 USERNAME=$3
-DIST=$4
 
 # We probably don't care about any errors...
 PHP='php -d display_errors=off -q'
@@ -28,16 +26,13 @@ do
 	cat $f >> /tmp/${DBNAME}.sql
 done
 
-if [ $DIST == 'MAMP' ]
-then
-    /Applications/MAMP/Library/bin/mysql --host=localhost -uroot -p < /tmp/${DBNAME}.sql
-else
-    mysql -u root -p < /tmp/${DBNAME}.sql
-fi
+mysql -u root -p < /tmp/${DBNAME}.sql
 
 unlink /tmp/${DBNAME}.sql
 
-# write to disk?
+# TO DO: UPDATE www/include/config.php HERE
+# TO DO: UPDATE www/include/secrets.php HERE
+# (20160130/thisisaaronland)
 
 echo ""
 echo "\t------------------------------";

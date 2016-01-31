@@ -21,3 +21,5 @@ rm -rf ${TMP_API}
 echo "all done";
 echo "------------------------------";
 echo ""
+
+exit 0
