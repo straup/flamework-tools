@@ -62,6 +62,7 @@ echo "setting up .htaccess files"
 echo "------------------------------";
 
 cp ${TOOLS}/apache/.htaccess-deny ${PROJECT}/apache/.htaccess
+cp ${TOOLS}/apache/.htaccess-deny ${PROJECT}/ubuntu/.htaccess
 cp ${TOOLS}/apache/.htaccess-deny ${PROJECT}/schema/.htaccess
 cp ${TOOLS}/apache/.htaccess-deny ${PROJECT}/bin/.htaccess
 cp ${TOOLS}/apache/.htaccess-noindexes ${PROJECT}/.htaccess
