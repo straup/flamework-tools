@@ -50,7 +50,7 @@ do
 done
 
 
-chgrp -R www-data ${ROOT}/www/templates_c
-chmod -R g+ws ${ROOT}/www/templates_c
+sudo chgrp -R www-data ${ROOT}/www/templates_c
+sudo chmod -R g+ws ${ROOT}/www/templates_c
 
-/etc/init.d/apache2 restart
+sudo /etc/init.d/apache2 restart
