@@ -47,7 +47,7 @@ fi
 # See this? This assumes we're running in AWS or on localhost... which is
 # inevitably going to be wrong one day (20160131/thisisaaronland)
 
-PUBLIC_IP=`curl -s http://169.254.169.254/latest/meta-data/public-ipv4`
+PUBLIC_IP=`curl -s --connect-timeout 3 http://169.254.169.254/latest/meta-data/public-ipv4`
 
 if [ "${PUBLIC_IP}" = "" ]
 then
