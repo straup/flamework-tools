@@ -8,7 +8,7 @@ TOOLS=`dirname $WHEREAMI`
 PROJECT=$1
 PROJET_NAME=`basename ${PROJECT}`
 
-${TOOLS}/make-api.sh ${PROJECT}
+# ${TOOLS}/make-api.sh ${PROJECT}
 
 TMP_API="${TOOLS}/tmp-api"
 mkdir ${TMP_API}

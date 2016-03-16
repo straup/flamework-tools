@@ -50,13 +50,13 @@ echo "*.conf" >> ${PROJECT}/apache/.gitignore
 cp ${TOOLS}/apache/example.conf ${PROJECT}/apache/${PROJECT_NAME}.conf.example
 cp ${TOOLS}/apache/example.conf ${PROJECT}/apache/${PROJECT_NAME}.conf
 
-perl -p -i -e "s/__PROJECT_ROOT__/${PROJECT}/" ${PROJECT}/apache/${PROJECT_NAME}.conf
-perl -p -i -e "s/__PROJECT_NAME__/${PROJECT_NAME}/" ${PROJECT}/apache/${PROJECT_NAME}.conf
+perl -p -i -e "s!__PROJECT_ROOT__!${PROJECT}!" ${PROJECT}/apache/${PROJECT_NAME}.conf
+perl -p -i -e "s!__PROJECT_NAME__!${PROJECT_NAME}!" ${PROJECT}/apache/${PROJECT_NAME}.conf
 
 echo "cloning ubuntu utilities"
 echo "------------------------------";
 
-cp -r ${TOOLS}/ubuntu $PROJECT}/
+cp -r ${TOOLS}/ubuntu ${PROJECT}/
 
 echo "setting up .htaccess files"
 echo "------------------------------";
