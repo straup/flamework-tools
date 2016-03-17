@@ -49,6 +49,10 @@ do
     sudo perl -p -i -e "s/short_open_tag = Off/short_open_tag = On/" /etc/php5/${ctx}/php.ini;
 done
 
+if [ ! -f ${ROOT}/www/include/secrets.php ]
+then
+    cp ${ROOT}/www/include/secrets.php.example ${ROOT}/www/include/secrets.php
+fi
 
 sudo chgrp -R www-data ${ROOT}/www/templates_c
 sudo chmod -R g+ws ${ROOT}/www/templates_c
