@@ -65,4 +65,7 @@ perl -p -i -e "s/GLOBALS\['cfg'\]\['db_main'\]\['pass'\] = ''/GLOBALS\['cfg'\]\[
 perl -p -i -e "s/GLOBALS\['cfg'\]\['db_users'\]\['pass'\] = ''/GLOBALS\['cfg'\]\['db_users'\]\['pass'\] = '${PASSWORD}'/" ${SECRETS};
 perl -p -i -e "s/GLOBALS\['cfg'\]\['db_poormans_slaves'\]\['pass'\] = ''/GLOBALS\['cfg'\]\['db_poormans_slaves'\]\['pass'\] = '${PASSWORD}'/" ${SECRETS};
 
+# please to update db name and db user name in config.php...
+# (20160316/thisisaaronland)
+
 exit 0
