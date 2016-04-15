@@ -8,17 +8,39 @@ TOOLS=`dirname $WHEREAMI`
 PROJECT=$1
 PROJECT_NAME=`basename ${PROJECT}`
 
+TMP="/tmp/${PROJECT}"
+
 echo "cloning dependencies"
 echo "------------------------------";
 
-git clone https://github.com/whosonfirst/flamework.git ${PROJECT}/
+# git clone https://github.com/whosonfirst/flamework.git ${PROJECT}/
+git clone https://github.com/whosonfirst/flamework.git ${TMP}/
 
-echo "configuting git things"
-echo "------------------------------";
+for WHAT in `ls -a ${TMP}`
+do
+    if [ -z "${WHAT//[^.]/}" ]
+    then
+	cp -r ${TMP}/${WHAT} ${PROJECT}/${WHAT}
+	echo $WHAT
+    fi
+    
+done
 
-echo "*~" >> ${PROJECT}/.gitignore
-rm -rf ${PROJECT}/.git
-rm -f ${PROJECT}/.gitattributes
+rm -rf ${TMP}
+
+exit 1
+
+if [ ! -d ${PROJECT} ]
+then
+    mkdir ${PROJECT}
+fi
+
+# echo "configuting git things"
+# echo "------------------------------";
+
+# echo "*~" >> ${PROJECT}/.gitignore
+# rm -rf ${PROJECT}/.git
+# rm -f ${PROJECT}/.gitattributes
 
 echo "setting up README files"
 echo "------------------------------";
