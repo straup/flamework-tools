@@ -8,58 +8,18 @@ TOOLS=`dirname $WHEREAMI`
 PROJECT=$1
 PROJET_NAME=`basename ${PROJECT}`
 
-echo "cloning dependencies"
-echo "------------------------------";
+# ${TOOLS}/make-api.sh ${PROJECT}
 
-git clone https://github.com/straup/flamework.git ${PROJECT}/
+TMP_API="${TOOLS}/tmp-api"
+mkdir ${TMP_API}
 
-mkdir -p ${PROJECT}/apache
+git clone https://github.com/whosonfirst/flamework-api.git ${TMP_API}
 
-echo "*~" >> ${PROJECT}/.gitignore
-echo "*.conf" >> ${PROJECT}/apache/.gitignore
-rm -rf ${PROJECT}/.git
-rm -f ${PROJECT}/.gitattributes
-
-echo "setting up README files"
-echo "------------------------------";
-
-mv ${PROJECT}/README.md	${PROJECT}/README.FLAMEWORK.md
-
-echo ${PROJECT_NAME} > ${PROJECT}/README.md
-echo "--" >> ${PROJECT}/README.md
-
-echo "removing unnecessary files"
-echo "------------------------------";
-
-rm -rf ${PROJECT}/www/cron
-rm -rf ${PROJECT}/docs
-rm -rf ${PROJECT}/tests
-
-# TODO: figure out if sudo is necessary
-# sudo chown -R www-data ${PROJECT}/www/templates_c
-
-echo "setting up apache files"
-echo "------------------------------";
-
-cp ${TOOLS}/apache/example.conf ${PROJECT}/apache/${PROJECT_NAME}.conf.example
-cp ${TOOLS}/apache/example.conf ${PROJECT}/apache/README.md
-
-echo "setting up .htaccess files"
-echo "------------------------------";
-
-cp ${TOOLS}/apache/.htaccess-deny ${PROJECT}/apache/.htaccess
-cp ${TOOLS}/apache/.htaccess-deny ${PROJECT}/schema/.htaccess
-cp ${TOOLS}/apache/.htaccess-deny ${PROJECT}/bin/.htaccess
-cp ${TOOLS}/apache/.htaccess-noindexes ${PROJECT}/.htaccess
-
-echo "setting up (application) config files"
-echo "------------------------------";
-
-cp ${PROJECT}/www/include/config.php.example ${PROJECT}/www/include/config.php
-echo "*~" >> ${PROJECT}/www/.gitignore
-
-${TOOLS}/bin/configure-secrets.sh ${PROJECT}
+${TMP_API}/bin/setup.sh ${PROJECT}
+rm -rf ${TMP_API}
 
 echo "all done";
 echo "------------------------------";
 echo ""
+
+exit 0

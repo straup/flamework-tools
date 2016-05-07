@@ -8,17 +8,39 @@ TOOLS=`dirname $WHEREAMI`
 PROJECT=$1
 PROJECT_NAME=`basename ${PROJECT}`
 
+TMP="/tmp/${PROJECT}"
+
 echo "cloning dependencies"
 echo "------------------------------";
 
-git clone https://github.com/straup/flamework.git ${PROJECT}/
+# git clone https://github.com/whosonfirst/flamework.git ${PROJECT}/
+git clone https://github.com/whosonfirst/flamework.git ${TMP}/
 
-mkdir -p ${PROJECT}/apache
+for WHAT in `ls -a ${TMP}`
+do
+    if [ -z "${WHAT//[^.]/}" ]
+    then
+	cp -r ${TMP}/${WHAT} ${PROJECT}/${WHAT}
+	echo $WHAT
+    fi
+    
+done
 
-echo "*~" >> ${PROJECT}/.gitignore
-echo "*.conf" >> ${PROJECT}/apache/.gitignore
-rm -rf ${PROJECT}/.git
-rm -f ${PROJECT}/.gitattributes
+rm -rf ${TMP}
+
+exit 1
+
+if [ ! -d ${PROJECT} ]
+then
+    mkdir ${PROJECT}
+fi
+
+# echo "configuting git things"
+# echo "------------------------------";
+
+# echo "*~" >> ${PROJECT}/.gitignore
+# rm -rf ${PROJECT}/.git
+# rm -f ${PROJECT}/.gitattributes
 
 echo "setting up README files"
 echo "------------------------------";
@@ -35,6 +57,8 @@ rm -rf ${PROJECT}/tests
 rm -f ${PROJECT}/.travis.yml
 rm -f ${PROJECT}/Vagrantfile
 rm -f ${PROJECT}/LICENSE
+rm -f ${PROJECT}/www/paging.php
+rm -f ${PROJECT}/www/templates/page_paging.txt
 
 # TODO: figure out if sudo is necessary
 # sudo chown -R www-data ${PROJECT}/www/templates_c
@@ -42,27 +66,35 @@ rm -f ${PROJECT}/LICENSE
 echo "setting up apache files"
 echo "------------------------------";
 
+mkdir -p ${PROJECT}/apache
+echo "*.conf" >> ${PROJECT}/apache/.gitignore
+
 cp ${TOOLS}/apache/example.conf ${PROJECT}/apache/${PROJECT_NAME}.conf.example
-cp ${TOOLS}/apache/example.conf ${PROJECT}/apache/README.md
+cp ${TOOLS}/apache/example.conf ${PROJECT}/apache/${PROJECT_NAME}.conf
+
+perl -p -i -e "s!__PROJECT_ROOT__!${PROJECT}!" ${PROJECT}/apache/${PROJECT_NAME}.conf
+perl -p -i -e "s!__PROJECT_NAME__!${PROJECT_NAME}!" ${PROJECT}/apache/${PROJECT_NAME}.conf
+
+echo "cloning ubuntu utilities"
+echo "------------------------------";
+
+cp -r ${TOOLS}/ubuntu ${PROJECT}/
 
 echo "setting up .htaccess files"
 echo "------------------------------";
 
 cp ${TOOLS}/apache/.htaccess-deny ${PROJECT}/apache/.htaccess
+cp ${TOOLS}/apache/.htaccess-deny ${PROJECT}/ubuntu/.htaccess
 cp ${TOOLS}/apache/.htaccess-deny ${PROJECT}/schema/.htaccess
 cp ${TOOLS}/apache/.htaccess-deny ${PROJECT}/bin/.htaccess
 cp ${TOOLS}/apache/.htaccess-noindexes ${PROJECT}/.htaccess
 
 echo "setting up (application) config files"
-echo "------------------------------";
+echo "------------------------------"
 
 cp ${PROJECT}/www/include/secrets.php.example ${PROJECT}/www/include/secrets.php
-rm ${PROJECT}/www/include/secrets.php.example
-
-echo "*~" >> ${PROJECT}/www/.gitignore
-
-${TOOLS}/bin/configure-secrets.sh ${PROJECT}
+# rm ${PROJECT}/www/include/secrets.php.example
 
 echo "all done";
-echo "------------------------------";
+echo "------------------------------"
 echo ""
